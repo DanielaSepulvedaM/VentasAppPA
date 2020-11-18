@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Editar Cliente</title>  
+    </h:head>
+    <h:body>
+        
+        <ui:composition template="../../WEB-INF/plantillas/plantilla.xhtml">
+            <ui:define name="content">
+                <div class="card border-primary mb-3">
+                    <div class="card-header">Modificacion Cliente</div>
+                    <div class="card-body text-primary">
+                        <h:form>
+                            <!--metodo para crear el cliente NUEVO CLIENTE ES UN METODO-->
+                            <h:commandButton action="listadoClientes" value="Regresar" style="text-decoration: underline;" class="btn btn-light my-2 text-muted" />
+                            <h:inputHidden id="id" value="#{clienteBean.cliente.id}"></h:inputHidden>
+                            
+                            <div class="form-group">
+                                <h:outputLabel for="identidad" class="control-label col-sm-4"><b>Identidad</b></h:outputLabel>
+                                <h:inputText id="identidad" value="#{clienteBean.cliente.identidad}" class="form-control"></h:inputText>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel for="nombre" class="control-label col-sm-4"><b>Nombre</b></h:outputLabel>
+                                <h:inputText id="nombre" value="#{clienteBean.cliente.nombre}" class="form-control"></h:inputText>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel for="apellido" class="control-label col-sm-4"><b>Apellido</b></h:outputLabel>
+                                <h:inputText id="apellido" value="#{clienteBean.cliente.apellido}" class="form-control"></h:inputText>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel for="email" class="control-label col-sm-4"><b>Email</b></h:outputLabel>
+                                <h:inputText id="email" value="#{clienteBean.cliente.email}" class="form-control"></h:inputText>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel for="telefono" class="control-label col-sm-4"><b>Telefono</b></h:outputLabel>
+                                <h:inputText id="telefono" value="#{clienteBean.cliente.telefono}" class="form-control"></h:inputText>
+                            </div>
+                            <div class="form-group">
+                                <h:commandButton value="Editar" action="#{clienteBean.modificarCliente()}" class="btn btn-primary" style="width: 80px;"/>
+                            </div>
+
+                            </h:form>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition> 
+    </h:body>
+</html>

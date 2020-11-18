@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Listado Clientes</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../../WEB-INF/plantillas/plantilla.xhtml">
+            <ui:define name="content">
+                <div class="card border-primary mb-3">
+                    <div class="card-header text-muted">Listado de Clientes</div>
+                    <div class="card-body text-primary">
+                        <h:form>
+                            <!--METODO para listar crear el nuevo cliente -->
+                            <h:commandButton action="#{clienteBean.nuevoCliente()}" value="Crear Cliente" class="btn btn-primary my-2" />
+                            <h:dataTable value="#{clienteBean.clientes}" var="cliente" class="table table-hover pl-2">
+                                <!--crear las columnas  -->
+                                <h:column >
+                                    <!--titulo-->
+                                    <f:facet name="header">Id</f:facet>
+                                    <!--contenido de cada linea en value el valor que vamos a llevar-->
+                                    <h:outputText value="#{cliente.id}"></h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <!--titulo-->
+                                    <f:facet name="header">Identificacion</f:facet>
+                                    <!--contenido de cada linea en value el valor que vamos a llevar-->
+                                    <h:outputText value="#{cliente.identidad}"></h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <!--titulo-->
+                                    <f:facet name="header">Nombre</f:facet>
+                                    <!--contenido de cada linea en value el valor que vamos a llevar-->
+                                    <h:outputText value="#{cliente.nombre}"></h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <!--titulo-->
+                                    <f:facet name="header">Apellido</f:facet>
+                                    <!--contenido de cada linea en value el valor que vamos a llevar-->
+                                    <h:outputText value="#{cliente.apellido}"></h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <!--titulo-->
+                                    <f:facet name="header">email</f:facet>
+                                    <!--contenido de cada linea en value el valor que vamos a llevar-->
+                                    <h:outputText value="#{cliente.email}"></h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <!--titulo-->
+                                    <f:facet name="header">Telefono</f:facet>
+                                    <!--contenido de cada linea en value el valor que vamos a llevar-->
+                                    <h:outputText value="#{cliente.telefono}"></h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Editar</f:facet>
+                                    <h:commandButton action="#{clienteBean.editar(cliente.id)}" value="Editar" class="btn btn-secondary btn-sm" style="background:#3176B1"></h:commandButton>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Eliminar</f:facet>
+                                    <h:commandButton action="#{clienteBean.eliminar(cliente.id)}" value="Eliminar" class="btn btn-danger btn-sm"></h:commandButton>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                </div>  
+            </ui:define>
+        </ui:composition>    
+    </h:body>
+</html>

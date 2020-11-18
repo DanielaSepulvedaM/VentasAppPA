@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Creacion Cliente</title>  
+    </h:head>
+    <h:body>
+        <ui:composition template="../../WEB-INF/plantillas/plantilla.xhtml">
+            <ui:define name="content">
+                <div class="card border-primary mb-3">
+                    <div class="card-header">#{msgs['nuevoCliente.titulo']}</div>
+                    <div class="card-body text-primary">
+                        <h:form>
+                            <h:messages globalOnly="true" class="form-control alert-danger"></h:messages>
+                            <!--metodo para crear el cliente NUEVO CLIENTE ES UN METODO-->
+                            <h:commandButton action="listadoClientes" value="#{msgs['nuevoCliente.regresar']}" style="text-decoration: underline;" class="btn btn-light my-2 text-muted"/>
+                            <div class="form-group">
+                                <h:outputLabel for="identidad" class="control-label col-sm-4" value="#{msgs['nuevoCliente.identidad']}"></h:outputLabel>
+                                <h:inputText required="true" id="identidad" value="#{clienteBean.cliente.identidad}" class="form form-control"></h:inputText>
+                                <h:message for="identidad" class="form-control alert alert-danger"></h:message>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel for="nombre" class="control-label col-sm-4" value="#{msgs['nuevoCliente.nombre']}"></h:outputLabel>
+                                <h:inputText required="true" id="nombre" value="#{clienteBean.cliente.nombre}" class="form-control">
+                                    <f:validateLength minimum="3" maximum="45"></f:validateLength>
+                                </h:inputText>
+                                <h:message for="nombre" class="form-control alert alert-danger"></h:message>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel for="apellido" class="control-label col-sm-4" value="#{msgs['nuevoCliente.apellido']}"></h:outputLabel>
+                                <h:inputText required="true" id="apellido" value="#{clienteBean.cliente.apellido}" class="form-control"></h:inputText>
+                                <h:message for="apellido" class="form-control alert alert-danger"></h:message>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel for="email" class="control-label col-sm-4" value="#{msgs['nuevoCliente.email']}" ></h:outputLabel>
+                                <h:inputText required="true" id="email" value="#{clienteBean.cliente.email}" class="form-control"></h:inputText>
+                                <h:message for="email" class="form-control alert alert-danger"></h:message>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel for="telefono" class="control-label col-sm-4" value="#{msgs['nuevoCliente.telefono']}"></h:outputLabel>
+                                <h:inputText id="telefono" value="#{clienteBean.cliente.telefono}" class="form-control"></h:inputText>
+                            </div>
+                            <div class="form-group">
+                                <h:commandButton value="#{msgs['nuevoCliente.enviar']}" action="#{clienteBean.guardarCliente()}" class="btn btn-primary" style="width: 80px;"/>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition> 
+    </h:body>
+</html>
