@@ -42,7 +42,7 @@ public class Producto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "idProducto")
     private Integer id;
     @Size(max = 45)
     @Column(name = "nombre")

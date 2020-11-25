@@ -1,16 +1,47 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Creacion Producto</title>
+        
+    </h:head>
+    <h:body>
+        <ui:composition template="../../WEB-INF/plantillas/plantilla.xhtml">
+            <ui:define name="content">
+                <div class="card border-primary mb-3">
+                    <div class="card-header">Modificacion Producto</div>
+                    <div class="card-body text-primary">
+                        <h:form>
+                            <h:commandButton action="listadoProductos" value="Regresar" class="btn btn-secondary my-2"/>
+                            <h:inputHidden id="id" value="#{productoBean.producto.id}"></h:inputHidden>
+                            <div class="form-group">
+                                <h:outputLabel for="nombre" class="control-label col-sm-4"><b>Nombre</b></h:outputLabel>
+                                <h:inputText id="nombre" value="#{productoBean.producto.nombre}" class="form-control"></h:inputText>
+                                <h:message for="nombre" class="form-control alert alert-danger"></h:message>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel for="precio" class="control-label col-sm-4"><b>Precio</b></h:outputLabel>
+                                <h:inputText id="precio" value="#{productoBean.producto.precio}" class="form-control"></h:inputText>
+                                <h:message for="precio" class="form-control alert alert-danger"></h:message>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel for="createAt" class="control-label col-sm-4"><b>Fecha Creación</b></h:outputLabel>
+                                <h:inputText id="createAt" value="#{productoBean.producto.createAt}" class="form-control">
+                                    <f:convertDateTime pattern="dd-MM-yyyy"></f:convertDateTime>
+                                </h:inputText>
+                                <h:message for="createAt" class="form-control alert alert-danger"></h:message>
+                            </div>
+                            <div class="form-group">
+                                <h:commandButton value="Enviar" action="#{productoBean.enviar()}" class="btn btn-primary" style="width: 80px;"></h:commandButton>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>    
+            </ui:define>
+        </ui:composition>    
+    </h:body>
 </html>

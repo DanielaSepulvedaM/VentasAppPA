@@ -5,51 +5,55 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Listado Productos</title>
+        <title>Listado Facturas</title>
     </h:head>
     <h:body>
         <ui:composition template="../../WEB-INF/plantillas/plantilla.xhtml">
             <ui:define name="content">
                 <div class="card border-primary mb-3">
-                    <div class="card-header text-muted">Listado de Productos</div>
+                    <div class="card-header text-muted">Listado de Facturas</div>
                     <div class="card-body text-primary">
                         <h:form>
                             <!--METODO para listar crear el nuevo cliente -->
-                            <h:commandButton action="#{productoBean.nuevoProducto()}" value="Crear Producto" class="btn btn-primary my-2" />
-                            <h:dataTable value="#{productoBean.clientes}" var="cliente" class="table table-hover pl-2">
+                            <h:commandButton action="#{facturaBean.crearFactura()}" value="Crear Factura" class="btn btn-primary my-2" />
+                            <h:dataTable value="#{facturaBean.facturas}" var="factura" class="table table-hover pl-2">
                                 <!--crear las columnas  -->
                                 <h:column >
                                     <!--titulo-->
-                                    <f:facet name="header">Id</f:facet>
+                                    <f:facet name="header">Numero</f:facet>
                                     <!--contenido de cada linea en value el valor que vamos a llevar-->
-                                    <h:outputText value="#{producto.id}"></h:outputText>
+                                    <h:outputText value="#{factura.id}"></h:outputText>
                                 </h:column>
                                 <h:column>
                                     <!--titulo-->
-                                    <f:facet name="header">Nombre</f:facet>
+                                    <f:facet name="header">Fecha</f:facet>
                                     <!--contenido de cada linea en value el valor que vamos a llevar-->
-                                    <h:outputText value="#{producto.nombre}"></h:outputText>
+                                    <h:outputText value="#{factura.createAt}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                    </h:outputText>
                                 </h:column>
                                 <h:column>
                                     <!--titulo-->
-                                    <f:facet name="header">Precio</f:facet>
+                                    <f:facet name="header">Cliente</f:facet>
                                     <!--contenido de cada linea en value el valor que vamos a llevar-->
-                                    <h:outputText value="#{producto.precio}"></h:outputText>
+                                    <h:outputText value="#{factura.cliente.nombre}"></h:outputText>
                                 </h:column>
+                                
                                 <h:column>
                                     <!--titulo-->
-                                    <f:facet name="header">Fecha Creacion</f:facet>
+                                    <f:facet name="header">Total</f:facet>
                                     <!--contenido de cada linea en value el valor que vamos a llevar-->
-                                    <h:outputText value="#{producto.createAt}"></h:outputText>
-                                    <f:convertDateTime pattern="dd-MM-yyyy"></f:convertDateTime>
+                                    <h:outputText value="00"></h:outputText>
                                 </h:column>
+                                
+                                
                                 <h:column>
                                     <f:facet name="header">Editar</f:facet>
-                                    <h:commandButton action="#{productoBean.editar(producto.id)}" value="Editar" class="btn btn-secondary btn-sm" style="background:#3176B1"></h:commandButton>
+                                    <h:commandButton action="#{facturaBean.editar(factura.id)}" value="Editar" class="btn btn-secondary btn-sm" style="background:#3176B1"></h:commandButton>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">Eliminar</f:facet>
-                                    <h:commandButton action="#{productoBean.eliminar(producto.id)}" value="Eliminar" class="btn btn-danger btn-sm"></h:commandButton>
+                                    <h:commandButton action="#{facturaBean.eliminar(factura.id)}" value="Eliminar" class="btn btn-danger btn-sm"></h:commandButton>
                                 </h:column>
                             </h:dataTable>
                         </h:form>

@@ -38,6 +38,46 @@
         </navigation-case>
     </navigation-rule>
     
+     <navigation-rule id="5">
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>listadoProductos</from-outcome>
+            <to-view-id>/pages/producto/listadoProductos.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule id="6">
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>formProducto</from-outcome>
+            <to-view-id>/pages/producto/formProducto.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule id="7">
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>nuevaFactura</from-outcome>
+            <to-view-id>/pages/factura/nuevaFactura.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule id="8">
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>editFactura</from-outcome>
+            <to-view-id>/pages/factura/editFactura.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule id="9">
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>listadoFacturas</from-outcome>
+            <to-view-id>/pages/factura/listadoFacturas.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
     <application>
         <locale-config>
             <default-locale>es</default-locale>

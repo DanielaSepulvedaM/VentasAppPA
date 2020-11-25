@@ -12,7 +12,8 @@ import javax.inject.Named;
 @RequestScoped //para indicar el alcance (applications, session, request)
 
 public class ProductoBean {
-   @Inject
+   
+    @Inject
    private ProductoService productoService;
    
    private List<Producto>productos;
@@ -62,26 +63,18 @@ public class ProductoBean {
     }
     
     public String enviar(){
-        String url;
+        String url = "";
         if(producto.getId() != null){
-            url=this.modificar();
-            
+            url=this.modificar();       
         }else{
             url = this.guardarProducto();
      
         }
-        return "listadoProductos";
+        return url;
     }
     
     
     //*****************************
-    public ProductoService getProductoService() {
-        return productoService;
-    }
-
-    public void setProductoService(ProductoService productoService) {
-        this.productoService = productoService;
-    }
 
     public List<Producto> getProductos() {
         return productos;

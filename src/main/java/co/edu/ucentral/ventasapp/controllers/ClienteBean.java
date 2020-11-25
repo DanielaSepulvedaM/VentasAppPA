@@ -11,10 +11,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 //clase normal de java pero tiene una notacion para realizar la inyeccion de atributos
-
 @Named("clienteBean") //notacion para saber q es un bean y poner el nombre para saber que se esta hablando del objeto de esta clase
 @RequestScoped //para indicar el alcance (applications, session, request)
 public class ClienteBean {
+    
     @Inject //se inyecto clienteService
     private ClienteService clienteService;
     
@@ -23,16 +23,13 @@ public class ClienteBean {
     
 
     //****CONTRUCTOR****
-    public ClienteBean() {
-    }
+    public ClienteBean() {}
     
     //****ir a la BD y consultar la informacion que se ejecute cada vez que valla al objeto poner la notacion****
     @PostConstruct //****ANOTACION PARA Q SIEMPRE DE EJECUTE ESTE METODO ****
     public void inicializar(){
         clientes = clienteService.listarClientes(); //trae un objeto cliente
         cliente = new Cliente(); //intanciar cliente normal por q no se realizo inyeccion
-        
-    
     }
     
     //METODO NUEVO CLIENTE
@@ -75,18 +72,16 @@ public class ClienteBean {
         this.clienteService.modificarCliente(cliente);
         clientes=clienteService.listarClientes(); //otra forma
         return "listadoClientes";//retornar a la pagina quq uno considere
-    
-    
     }
+    
     public String eliminar(int idCliente){
        cliente = new Cliente();
        cliente.setId(idCliente);
        this.clienteService.eliminarCliente(cliente);
        clientes = this.clienteService.listarClientes();
-        return "listadoClientes";//retornar a la pagina quq uno considere
-    
-    
+       return "listadoClientes";//retornar a la pagina quq uno considere
     }
+ 
     
     //METODOS GET Y SET DE LOS 2 ATRIBUTOS QUE NO SE INYECTARON
     public List<Cliente> getClientes() {

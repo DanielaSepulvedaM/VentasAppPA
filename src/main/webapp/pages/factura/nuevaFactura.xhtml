@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Creacion Cliente</title>  
+    </h:head>
+    <h:body>
+        <ui:composition template="../../WEB-INF/plantillas/plantilla.xhtml">
+            <ui:define name="content">
+                <div class="card border-primary mb-3">
+                    <div class="card-header">Creacion de Factura</div>
+                    <div class="card-body text-primary">
+                        <h:form>
+                            <h:messages globalOnly="true" class="form-control alert-danger"></h:messages>
+                            <!--metodo para crear el cliente NUEVO CLIENTE ES UN METODO-->
+                            <h:commandButton action="listadoFacturas" value="Regresar" style="text-decoration: underline;" class="btn btn-light my-2 text-muted"/>
+                            <div class="form-group row">
+                                <h:outputLabel for="observacion" class="control-label col-sm-4" value="Observacion"></h:outputLabel>
+                                <h:inputTextarea required="true" id="observacion" value="#{facturaBean.factura.observacion}" class="form form-control"></h:inputTextarea>
+                                <h:message for="observacion" class="form-control alert alert-danger"></h:message>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <h:outputLabel for="idCliente" class="control-label col-sm-4" value="cliente"></h:outputLabel>
+                                <h:selectOneMenu id="idCliente" value="#{facturaBean.idCliente}" class="form-control">
+                                    <f:selectItem itemLabel="Seleccione......" itemValue="" noSelectionOption="true" ></f:selectItem>
+                                    <f:selectItems value="#{facturaBean.clientes}" var="cliente" itemValue="#{cliente.id}" itemLabel="#{cliente.nombre} #{cliente.apellido} "></f:selectItems>
+                                    <f:validateRequired />    
+                                </h:selectOneMenu>
+                                <h:message for="idCliente" class="form-control alert alert-danger"></h:message>
+                            </div>
+                            
+                             <div class="form-group row">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                    Adicionar Item
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Agregar Item Factura</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <h:outputLabel for="idProducto" class="control-label col-sm-4"><b>Producto</b></h:outputLabel>
+                                                    <h:selectOneMenu id="idProducto" value="#{facturaBean.idProducto}" class="form-control">
+                                                        <f:selectItem itemLabel="Seleccione...." itemValue="" noSelectionOption="true"/>
+                                                        <f:selectItems value="#{facturaBean.productos}" var="producto" itemValue="#{producto.id}" itemLabel="#{producto.nombre}"/>
+                                                        <f:validateRequired/>
+                                                    </h:selectOneMenu>
+                                                    <h:message for="idProducto" class="form-control alert alert-danger"></h:message>
+                                                </div>
+                                                <div class="form-group">
+                                                    <h:outputLabel for="cantidad" class="control-label col-sm-4"><b>cantidad</b></h:outputLabel>
+                                                    <h:inputText id="cantidad" required="true" value="#{facturaBean.cantidad}" class="form-control">
+                                                        <f:validateLongRange minimum="1" maximum="100000"></f:validateLongRange>
+                                                    </h:inputText>
+                                                    <h:message for="cantidad" class="form-control alert alert-danger"></h:message>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                <h:commandButton value="Enviar" action="#{facturaBean.addItem()}" class="btn btn-primary" style="width:80px;"> </h:commandButton>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            <h:dataTable value="#{facturaBean.factura.itemFacturaList}" var="itemFactura" class="table table-bordered">
+                                <h:column>
+                                    <f:facet name="header">Producto</f:facet>
+                                    <h:outputText value="#{itemFactura.producto.nombre}"></h:outputText>
+                                </h:column>
+                                
+                                <h:column class="text-right">
+                                    <f:facet name="header">Precio</f:facet>
+                                    <h:outputText value="#{itemFactura.precio}"></h:outputText>
+                                </h:column>
+                                
+                                <h:column class="text-right">
+                                    <f:facet name="header">Canitidad</f:facet>
+                                    <h:outputText value="#{itemFactura.cantidad}"></h:outputText>
+                                </h:column>
+                                
+                                <h:column class="text-right">
+                                    <f:facet name="header">Total</f:facet>
+                                    <h:outputText value="#{itemFactura.total}"></h:outputText>
+                                </h:column>                                
+                            </h:dataTable>
+                            
+                            <h3 class="float-right">Gran Total: <span class="badge-secondary">#{facturaBean.factura.granTotal}</span></h3>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <h:commandButton value="Enviar" action="#{facturaBean.guardar()}" class="btn btn-primary" style="width: 80px"></h:commandButton>
+                                    
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition> 
+    </h:body>
+</html>

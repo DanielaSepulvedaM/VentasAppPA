@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.ucentral.ventasapp.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -26,10 +22,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author Equipo440IS
- */
 @Entity
 @Table(name = "facturas")
 @NamedQueries({
@@ -40,24 +32,30 @@ import javax.validation.constraints.Size;
 public class Factura implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    
     @Size(max = 45)
     @Column(name = "observacion")
     private String observacion;
+    
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     private Date createAt;
+    
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Cliente cliente;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "factura", fetch = FetchType.LAZY)
     private List<ItemFactura> itemFacturaList;
 
     public Factura() {
+        this.itemFacturaList = new ArrayList();
     }
 
     public Factura(Integer id) {
@@ -103,6 +101,14 @@ public class Factura implements Serializable {
     public void setItemFacturaList(List<ItemFactura> itemFacturaList) {
         this.itemFacturaList = itemFacturaList;
     }
+    
+     public double getGranTotal(){
+        double valor = 0;
+        for(ItemFactura item: this.itemFacturaList){
+            valor = valor + item.getTotal();
+        }
+        return valor;
+    }
 
     @Override
     public int hashCode() {
@@ -123,6 +129,7 @@ public class Factura implements Serializable {
         }
         return true;
     }
+    
 
     @Override
     public String toString() {

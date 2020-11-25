@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.ucentral.ventasapp.models;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,10 +16,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-/**
- *
- * @author Equipo440IS
- */
 @Entity
 @Table(name = "item_facturas")
 @NamedQueries({
@@ -39,19 +31,23 @@ public class ItemFactura implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "cantidad")
     private int cantidad;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "precio")
     private double precio;
+    
     @JoinColumn(name = "producto_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Producto producto;
+    
     @JoinColumn(name = "factura_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)//agregar prop de cascade si es un elemento que va a guardar varios elementos
     private Factura factura;
 
     public ItemFactura() {
@@ -67,6 +63,7 @@ public class ItemFactura implements Serializable {
         this.precio = precio;
     }
 
+    //GET Y SET
     public Integer getId() {
         return id;
     }
@@ -107,6 +104,13 @@ public class ItemFactura implements Serializable {
         this.factura = factura;
     }
 
+    
+    public double getTotal(){
+        return this.cantidad*this.precio;
+    }
+    
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;
